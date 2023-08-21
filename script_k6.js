@@ -12,6 +12,13 @@ const target_vus = isNumeric(target_vus_env) ? Number(target_vus_env) : default_
 const target_time = isNumeric(target_time_env) ? Number(target_time_env) : default_times;
 const target_time_in_minutes = target_time + "m";
 
+export const options = {
+  thresholds: {
+    http_req_failed: ['rate<0.01'], // http errors should be less than 1%
+    http_req_duration: ['p(95)<200'], // 95% of requests should be below 200ms
+  },
+};
+
 export let options = {
   stages: [
       // Ramp-up from 1 to TARGET_VUS virtual users (VUs) in 5s
@@ -26,7 +33,7 @@ export let options = {
 };
 
 export default function () {
-  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy/classworlds/classworlds/1.1/classworlds-1.1.jar');
+  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy-group/classworlds/classworlds/1.1/classworlds-1.1.jar');
   check(response, { "status is 200": (r) => r.status === 200 });
-  sleep(.300);
+  //sleep(.100);
 };
