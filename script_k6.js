@@ -12,7 +12,7 @@ const target_vus = isNumeric(target_vus_env) ? Number(target_vus_env) : default_
 const target_time = isNumeric(target_time_env) ? Number(target_time_env) : default_times;
 const target_time_in_minutes = target_time + 'm';
 
-export let options = {
+export const options = {
   thresholds: {
     // Đặt ngưỡng cho tỷ lệ lỗi http_req_failed (<0.01%)
     http_req_failed: ['rate<0.01'],
