@@ -6,7 +6,6 @@ const isNumeric = (value) => /^\d+$/.test(value);
 const default_vus = 5;
 const default_times = 5;
 
-#env
 const target_vus_env = `${__ENV.TARGET_VUS}`;
 const target_time_env = `${__ENV.TARGET_TIME}`;
 const target_vus = isNumeric(target_vus_env) ? Number(target_vus_env) : default_vus;
