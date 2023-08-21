@@ -21,7 +21,7 @@ export let options = {
       { duration: target_time_in_minutes, target: target_vus },
 
       // Ramp-down from TARGET_VUS to 0 VUs for 5s
-      { duration: target_time_in_minutes, target: 0 }
+      { duration: "1m", target: 0 }
   ]
 };
 
