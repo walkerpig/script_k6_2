@@ -3,12 +3,12 @@ import { check, sleep } from 'k6';
 
 const isNumeric = (value) => /^\d+$/.test(value);
 
-const default_vus = 5;
+const default_requests = 100; // Số lượng request mặc định
 const default_times = 5;
 
-const target_vus_env = `${__ENV.TARGET_VUS}`;
+const target_requests_env = `${__ENV.TARGET_REQUESTS}`;
 const target_time_env = `${__ENV.TARGET_TIME}`;
-const target_vus = isNumeric(target_vus_env) ? Number(target_vus_env) : default_vus;
+const target_requests = isNumeric(target_requests_env) ? Number(target_requests_env) : default_requests;
 const target_time = isNumeric(target_time_env) ? Number(target_time_env) : default_times;
 const target_time_in_minutes = target_time + 'm';
 
@@ -17,13 +17,13 @@ export const options = {
     http_req_failed: ['rate<0.01'],
   },
   stages: [
-    // Ramp-up from 1 to TARGET_VUS virtual users (VUs) in 5s
-    { duration: target_time_in_minutes, target: target_vus },
+    // Ramp-up from 1 to target_requests requests per second in 5s
+    { duration: target_time_in_minutes, target: target_requests / target_time },
 
-    // Stay at rest on TARGET_VUS VUs for 10s
-    { duration: target_time_in_minutes, target: target_vus },
+    // Stay at rest on target_requests requests per second for 10s
+    { duration: target_time_in_minutes, target: target_requests / target_time },
 
-    // Ramp-down from TARGET_VUS to 0 VUs for 5s
+    // Ramp-down from target_requests requests per second to 0 for 5s
     { duration: '1m', target: 0 },
   ],
 };
