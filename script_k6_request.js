@@ -3,9 +3,10 @@ import { check, sleep } from 'k6';
 
 const isNumeric = (value) => /^\d+$/.test(value);
 
-const default_requests = 100; // Số lượng request mặc định
+const default_requests = 100;
 const default_times = 5;
 
+const url_env = `${__ENV.TARGET_URL}`;
 const target_requests_env = `${__ENV.TARGET_REQUESTS}`;
 const target_time_env = `${__ENV.TARGET_TIME}`;
 const target_requests = isNumeric(target_requests_env) ? Number(target_requests_env) : default_requests;
@@ -29,7 +30,7 @@ export const options = {
 };
 
 export default function () {
-  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy-group/ch/qos/logback/logback-classic/1.4.7/logback-classic-1.4.7-sources.jar');
+  const response = http.get(url_env);
   check(response, { 'status is 200': (r) => r.status === 200 });
   sleep(1);
 }

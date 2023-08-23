@@ -6,6 +6,7 @@ const isNumeric = (value) => /^\d+$/.test(value);
 const default_vus = 5;
 const default_times = 5;
 
+const url_env = `${__ENV.TARGET_URL}`;
 const target_vus_env = `${__ENV.TARGET_VUS}`;
 const target_time_env = `${__ENV.TARGET_TIME}`;
 const target_vus = isNumeric(target_vus_env) ? Number(target_vus_env) : default_vus;
@@ -29,7 +30,7 @@ export const options = {
 };
 
 export default function () {
-  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy-group/ch/qos/logback/logback-classic/1.4.7/logback-classic-1.4.7-sources.jar');
+  const response = http.get(url_env);
   check(response, { 'status is 200': (r) => r.status === 200 });
   sleep(1);
 }
