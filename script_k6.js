@@ -29,7 +29,7 @@ export const options = {
 };
 
 export default function () {
-  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy-group/com/amazonaws/aws-java-sdk-accessanalyzer/1.12.56/aws-java-sdk-accessanalyzer-1.12.56.jar');
+  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy-group/com/amazonaws/aws-java-sdk-account/1.12.534/aws-java-sdk-account-1.12.534.jar');
   check(response, { 'status is 200': (r) => r.status === 200 });
   sleep(.300);
 }
