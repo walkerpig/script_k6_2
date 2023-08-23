@@ -14,10 +14,7 @@ const target_time_in_minutes = target_time + 'm';
 
 export let options = {
   thresholds: {
-    // Đặt ngưỡng cho tỷ lệ lỗi http_req_failed (<0.01%)
     http_req_failed: ['rate<0.01'],
-    // Đặt ngưỡng cho thời gian trung bình của http_req_duration (p(95)<200ms)
-    //http_req_duration: ['p(95)<200'],
   },
   stages: [
     // Ramp-up from 1 to TARGET_VUS virtual users (VUs) in 5s
@@ -32,7 +29,7 @@ export let options = {
 };
 
 export default function () {
-  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy-group/classworlds/classworlds/1.1/classworlds-1.1.jar');
+  const response = http.get('https://registry.aws.platform.vpbank.dev/repository/maven-proxy-group/com/amazonaws/aws-java-sdk-accessanalyzer/1.12.56/aws-java-sdk-accessanalyzer-1.12.56.jar');
   check(response, { 'status is 200': (r) => r.status === 200 });
-  //sleep(.100);
+  sleep(.300);
 }
